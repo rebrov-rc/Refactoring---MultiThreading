@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-class ServletImpl implements Servlet{
+public class ServletImpl {
 
     private Map<String, RequestHandlerContainer> reqHandlersStore = new HashMap<>();
 
@@ -24,7 +24,6 @@ class ServletImpl implements Servlet{
             "/classic.html", "/events.html", "/events.js");
 
 
-    @Override
     public void listen(int webPort){
 
         final ExecutorService threadPool = Executors.newFixedThreadPool(64);
