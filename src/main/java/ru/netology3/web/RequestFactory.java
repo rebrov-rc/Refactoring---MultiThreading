@@ -1,8 +1,13 @@
-package ru.netology2.web;
+package ru.netology3.web;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RequestFactory {
@@ -37,25 +42,26 @@ public class RequestFactory {
         return others;
     }
 
-    private static Map<String, String> getQuery(String qu){
-        Map<String, String> query = new HashMap<>();
-
-        for (String item : qu.split("&")){
-            String [] kv = item.split("=");
-            query.put(kv[0], kv[1]);
-        }
+    private static List<NameValuePair> getQuery(String qu){
+        List<NameValuePair> query = URLEncodedUtils.parse(qu, Charset.defaultCharset());
         return query;
     }
 
     private static boolean checkLimit(String line){
-        int res = line.indexOf(line, limit);
-        return res != -1? false : true;
+
+        try{
+            line.charAt(limit);
+        } catch (IndexOutOfBoundsException ex){
+            return true;
+        }
+        return false;
     }
 
     public static Request getRequest(BufferedReader in){
         Request request = null;
         String method = null, path = null;
-        Map<String, String> query = null, otherHeaders = null;
+        List<NameValuePair> query = null;
+        Map<String, String> otherHeaders = null;
 
         try {
 

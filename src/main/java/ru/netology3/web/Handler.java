@@ -1,4 +1,4 @@
-package ru.netology2.web;
+package ru.netology3.web;
 
 import java.io.BufferedOutputStream;
 

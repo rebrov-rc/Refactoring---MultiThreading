@@ -1,5 +1,8 @@
-package ru.netology2.web;
+package ru.netology3.web;
 
+import org.apache.http.NameValuePair;
+
+import java.util.List;
 import java.util.Map;
 
 public class Request {
@@ -7,11 +10,11 @@ public class Request {
 
     private final String METHOD;
     private final String PATH;
-    private final Map<String, String> QUERY;
+    private final List<NameValuePair> QUERY;
     private final Map<String, String> otherHeaders;
 
 
-    public Request(String method, String path, Map<String, String> query, Map<String, String> otherHeaders){
+    public Request(String method, String path, List<NameValuePair> query, Map<String, String> otherHeaders){
         this.METHOD = method;
         this.PATH = path;
         this.QUERY = query;
@@ -24,8 +27,17 @@ public class Request {
 
     public String getPath(){return PATH;}
 
-    public Map<String, String> getQUERY() {
+    public List<NameValuePair> getQueryParams() {
         return QUERY;
+    }
+
+    public NameValuePair getQueryParam(String name){
+        for (NameValuePair pair : QUERY){
+            if (pair.getName().equals(name)){
+                return pair;
+            }
+        }
+        return null;
     }
 
     public String getValue(String key){

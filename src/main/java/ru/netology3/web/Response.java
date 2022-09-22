@@ -1,9 +1,9 @@
-package ru.netology2.web;
+package ru.netology3.web;
 
 public class Response {
 
-    public static final String badRequestError = "400 Bad Request";
-    public static final String notFoundError = "404 Not Found";
+    public static final String BAD_REQUEST_ERROR = "400 Bad Request";
+    public static final String NOT_FOUND_ERROR = "404 Not Found";
     public static final String OK = "200 OK";
 
     private Response(){}

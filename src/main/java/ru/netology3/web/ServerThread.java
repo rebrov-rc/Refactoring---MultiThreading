@@ -1,4 +1,4 @@
-package ru.netology2.web;
+package ru.netology3.web;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -36,22 +36,22 @@ public class ServerThread implements Runnable {
 
             final Request request = RequestFactory.getRequest(in);
             Handler handler = null;
-            if (request == null){
+            if (request == null) {
 
-            }else{
+            } else {
                 Map<String, Handler> inner = Server.getHandlers().get(request.getPath());
 
-                if (inner == null){
+                if (inner == null) {
                     handler = Server.getHandlers().get("publicFiles").get(request.getMETHOD());
 
-                }else{
+                } else {
                     handler = inner.get(request.getMETHOD());
                 }
 
                 if (handler == null) {
-                    out.write(Response.requestError(Response.badRequestError));
+                    out.write(Response.requestError(Response.BAD_REQUEST_ERROR));
                     out.flush();
-                }else{
+                } else {
                     handler.handle(request, out);
                 }
 
